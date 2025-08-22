@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import StudentsView from '../views/StudentsView.vue' 
+import StudentsListView from '../views/students/StudentsListView.vue' 
+import DocumentsView from '../views/students/DocumentsView.vue' 
 import PlaceholderView from '../views/PlaceholderView.vue' 
 
 const router = createRouter({
@@ -8,17 +9,28 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: () => import('../views/PlaceholderView.vue')
+      component: () => import('../views/PlaceholderView.vue'),
+      meta: { breadcrumb: 'Главная' }
     },
     {
       path: '/students',
       name: 'students',
-      component: () => import('../views/StudentsView.vue') 
+      component: () => import('../views/students/StudentsListView.vue'),
+      meta: { breadcrumb: 'Ученики' },
+      children: [
+        {
+          path: '', 
+          name: 'students-documents',
+          component: () => import('../views/students/DocumentsView.vue'),
+          meta: { breadcrumb: 'Документы' }
+        }
+      ]
     },
     {
       path: '/:catchAll(.*)',
       name: 'placeholder',
-      component: () => import('../views/PlaceholderView.vue')
+      component: () => import('../views/PlaceholderView.vue'),
+      meta: { breadcrumb: 'Заглушка' }
     }
   ]
 })
