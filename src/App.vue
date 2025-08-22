@@ -4,6 +4,7 @@
     <div class="app-layout__content-wrapper">
       <AppHeader />
       <main class="app-layout__main-content">
+        <router-view />
       </main>
     </div>
   </div>
