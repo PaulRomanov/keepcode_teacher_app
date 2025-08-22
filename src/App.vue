@@ -3,8 +3,7 @@
     <aside class="app-layout__sidebar">
     </aside>
     <div class="app-layout__content-wrapper">
-      <header class="app-layout__header">
-      </header>
+      <AppHeader />
       <main class="app-layout__main-content">
       </main>
     </div>
@@ -12,7 +11,7 @@
 </template>
 
 <script setup>
-
+import AppHeader from './components/AppHeader.vue';
 </script>
 
 <style lang="scss">
@@ -32,12 +31,6 @@
     display: flex;
     flex-direction: column;
     overflow-y: auto;
-  }
-
-  &__header {
-    height: 72px;
-    flex-shrink: 0;
-    background-color: $color-bg-white;
   }
 
   &__main-content {

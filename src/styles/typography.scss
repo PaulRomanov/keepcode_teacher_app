@@ -1,0 +1,13 @@
+@use 'variables' as *;
+
+.fw-bold {
+  font-weight: 700;
+}
+
+.fc-primary {
+  color: $color-text-dark;
+}
+
+.fc-secondary {
+  color: $color-text-grey;
+}
