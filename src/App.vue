@@ -29,7 +29,7 @@ import AppSidebar from './components/AppSidebar.vue';
   }
 
   &__main-content {
-    padding: 24px;
+    padding: 26px 90px;
     flex-grow: 1;
   }
 }
