@@ -1,18 +1,20 @@
 <template>
-  <button class="app-button" :class="`is-${color}`">
+  <button class="app-button" :class="`is-${color}`" @click="emit('click')">
     <slot></slot>
   </button>
 </template>
 
 <script setup>
-  import { defineProps } from 'vue';
+  import { defineProps, defineEmits } from 'vue';
 
   const props = defineProps({
     color: {
       type: String,
-      default: 'yellow', 
+      default: 'yellow',
     },
   });
+
+  const emit = defineEmits(['click']);
 </script>
 
 <style lang="scss" scoped>

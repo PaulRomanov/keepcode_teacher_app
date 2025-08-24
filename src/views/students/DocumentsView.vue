@@ -3,7 +3,9 @@
     <StudentProfile :student="studentData" />
     <div class="documents-page__filter-actions">
       <StudentFilter @update:filters="handleFiltersUpdate" />
-      <AppButton class="documents-page__add-button">добавить документ</AppButton>
+      <AppButton class="documents-page__add-button" color="yellow" @click="openModal">
+        добавить документ
+      </AppButton>
     </div>
     <div class="documents-page__cards">
       <DocumentCard
@@ -12,6 +14,10 @@
         :document="doc"
       />
     </div>
+
+    <AppModal :isVisible="isModalVisible" @close="closeModal">
+      <AddDocumentModal @close="closeModal"/>
+    </AppModal>
   </div>
 </template>
 
@@ -21,6 +27,8 @@
   import StudentFilter from '@/components/StudentFilter.vue';
   import AppButton from '@/components/AppButton.vue';
   import DocumentCard from '@/components/DocumentCard.vue';
+  import AppModal from '@/components/AppModal.vue';
+  import AddDocumentModal from '@/components/AddDocumentModal.vue';
   import { fetchDocuments } from '@/api';
 
   const studentData = ref({
@@ -74,6 +82,16 @@
   
     return filtered;
   });
+
+  const isModalVisible = ref(false);
+
+  const openModal = () => {
+    isModalVisible.value = true;
+  };
+
+  const closeModal = () => {
+    isModalVisible.value = false;
+  };
 
 </script>
 
