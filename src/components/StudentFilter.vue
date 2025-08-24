@@ -2,33 +2,48 @@
   <div class="student-filter">
     <div class="student-filter__select-wrapper">
       <label class="student-filter__select-label">Тип документа</label>
-      <select class="student-filter__select">
+      <select v-model="selectedType" class="student-filter__select">
         <option value="">Не выбрано</option>
-        <option value="">Договор</option>
-        <option value="">Справка</option>
-        <option value="">Другое</option>
+        <option value="Договор">Договор</option>
+        <option value="Справка">Справка</option>
+        <option value="Анкета">Анкета</option>
       </select>
     </div>
     <div class="student-filter__select-wrapper">
       <label class="student-filter__select-label">Статус</label>
-      <select class="student-filter__select">
+      <select v-model="selectedStatus" class="student-filter__select">
         <option value="">Не выбрано</option>
-        <option value="">Заключен</option>
-        <option value="">Расторгнут</option>
+        <option value="Заключен">Заключен</option>
+        <option value="Расторгнут">Расторгнут</option>
       </select>
     </div>
     <div class="student-filter__select-wrapper">
       <label class="student-filter__select-label">Сортировать по</label>
-      <select class="student-filter__select student-filter__select-data">
-        <option value="date">Дате</option>
-        <option value="date">более новые</option>
-        <option value="date">более старые</option>
+      <select v-model="selectedSort" class="student-filter__select student-filter__select-data">
+        <option value="newest">более новые</option>
+        <option value="oldest">более старые</option>
       </select>
     </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { ref, watch } from 'vue';
+
+const emit = defineEmits(['update:filters']);
+
+const selectedType = ref('');
+const selectedStatus = ref('');
+const selectedSort = ref('newest');
+
+watch([selectedType, selectedStatus, selectedSort], () => {
+  emit('update:filters', {
+    type: selectedType.value,
+    status: selectedStatus.value,
+    sort: selectedSort.value,
+  });
+});
+</script>
 
 <style lang="scss" scoped>
 @use "@/styles/variables" as *;

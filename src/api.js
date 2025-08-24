@@ -4,8 +4,8 @@ const documents = [
     type: 'Договор',
     number: '001',
     status: 'Заключен',
-    dateFrom: '04.07.2021',
-    dateTo: '04.07.2022',
+    dateFrom: '04.07.2025',
+    dateTo: '04.07.2027',
     fileType: 'pdf',
   },
   {
@@ -13,8 +13,8 @@ const documents = [
     type: 'Договор',
     number: '002',
     status: 'Расторгнут',
-    dateFrom: '04.07.2021',
-    dateTo: '04.07.2022',
+    dateFrom: '04.07.2024',
+    dateTo: '04.07.2025',
     fileType: 'jpg',
   },
   {
@@ -22,8 +22,8 @@ const documents = [
     type: 'Справка',
     number: '',
     status: 'Заключен',
-    dateFrom: '04.07.2021',
-    dateTo: '04.07.2022',
+    dateFrom: '04.07.2023',
+    dateTo: '04.07.2024',
     fileType: 'doc',
   },
   {

@@ -2,22 +2,21 @@
   <div class="documents-page">
     <StudentProfile :student="studentData" />
     <div class="documents-page__filter-actions">
-      <StudentFilter />
+      <StudentFilter @update:filters="handleFiltersUpdate" />
       <AppButton class="documents-page__add-button">добавить документ</AppButton>
     </div>
     <div class="documents-page__cards">
       <DocumentCard
-        v-for="doc in documents"
+        v-for="doc in filteredDocuments"
         :key="doc.id"
         :document="doc"
       />
     </div>
   </div>
-
 </template>
 
 <script setup>
-  import { ref, onMounted } from 'vue';
+  import { ref, onMounted, computed } from 'vue';
   import StudentProfile from '@/components/StudentProfile.vue';
   import StudentFilter from '@/components/StudentFilter.vue';
   import AppButton from '@/components/AppButton.vue';
@@ -42,8 +41,38 @@
 
   const documents = ref([]);
 
+  const filters = ref({
+    type: '',
+    status: '',
+    sort: 'newest',
+  });
+
   onMounted(async () => {
     documents.value = await fetchDocuments();
+  });
+
+  const handleFiltersUpdate = (newFilters) => {
+    filters.value = newFilters;
+  };
+
+  const filteredDocuments = computed(() => {
+    let filtered = documents.value;
+
+    if (filters.value.type) {
+      filtered = filtered.filter(doc => doc.type === filters.value.type);
+    }
+
+    if (filters.value.status) {
+      filtered = filtered.filter(doc => doc.status === filters.value.status);
+    }
+
+    if (filters.value.sort === 'newest') {
+      filtered = filtered.sort((a, b) => new Date(b.dateFrom) - new Date(a.dateFrom));
+    } else if (filters.value.sort === 'oldest') {
+      filtered = filtered.sort((a, b) => new Date(a.dateFrom) - new Date(b.dateFrom));
+    }
+  
+    return filtered;
   });
 
 </script>
