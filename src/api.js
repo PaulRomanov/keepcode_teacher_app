@@ -1,0 +1,46 @@
+const documents = [
+  {
+    id: 1,
+    type: 'Договор',
+    number: '001',
+    status: 'Заключен',
+    dateFrom: '04.07.2021',
+    dateTo: '04.07.2022',
+    fileType: 'pdf',
+  },
+  {
+    id: 2,
+    type: 'Договор',
+    number: '002',
+    status: 'Расторгнут',
+    dateFrom: '04.07.2021',
+    dateTo: '04.07.2022',
+    fileType: 'jpg',
+  },
+  {
+    id: 3,
+    type: 'Справка',
+    number: '',
+    status: 'Заключен',
+    dateFrom: '04.07.2021',
+    dateTo: '04.07.2022',
+    fileType: 'doc',
+  },
+  {
+    id: 4,
+    type: 'Анкета',
+    number: '',
+    status: 'Заключен',
+    dateFrom: '04.07.2021',
+    dateTo: '04.07.2022',
+    fileType: 'xls',
+  },
+];
+
+export const fetchDocuments = () => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(documents);
+    }, 500); 
+  });
+};
