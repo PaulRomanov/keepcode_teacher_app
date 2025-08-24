@@ -6,7 +6,7 @@
         <option value="">Не выбрано</option>
         <option value="Договор">Договор</option>
         <option value="Справка">Справка</option>
-        <option value="Анкета">Анкета</option>
+        <option value="Другое">Другое</option>
       </select>
     </div>
     <div class="student-filter__select-wrapper">
