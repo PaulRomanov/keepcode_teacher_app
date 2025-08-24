@@ -19,6 +19,7 @@
 
 <style lang="scss" scoped>
   @use "@/styles/variables" as *;
+  @use "sass:color";
 
   .app-button {
     padding: 10px 20px;
@@ -36,7 +37,7 @@
       background-color: $color-button-yellow;
 
       &:hover {
-        background-color: darken($color-button-yellow, 10%);
+        background-color: color.adjust($color-button-yellow, $lightness: -10%);
       }
     }
 
@@ -44,7 +45,7 @@
       background-color: $color-bg-blue;
 
       &:hover {
-        background-color: darken($color-bg-blue, 10%);
+        background-color: color.adjust($color-bg-blue, $lightness: -10%);
       }
     }
   }

@@ -1,16 +1,16 @@
 <template>
   <div class="file-icon-wrapper">
-    <PdfIcon v-if="fileType === 'pdf'" class="file-icon" />
+    <PDFIcon v-if="fileType === 'pdf'" class="file-icon" />
     <JpgIcon v-else-if="fileType === 'jpg'" class="file-icon" />
     <DocIcon v-else-if="fileType === 'doc'" class="file-icon" />
     <XlsIcon v-else-if="fileType === 'xls'" class="file-icon" />
-    <PdfIcon v-else class="file-icon" />
+    <PDFIcon v-else class="file-icon" />
   </div>
 </template>
 
 <script setup>
   import { defineProps } from 'vue';
-  import PdfIcon from './PdfIcon.vue';
+  import PDFIcon from './PDFIcon.vue';
   import JpgIcon from './JpgIcon.vue';
   import DocIcon from './DocIcon.vue';
   import XlsIcon from './XlsIcon.vue';
