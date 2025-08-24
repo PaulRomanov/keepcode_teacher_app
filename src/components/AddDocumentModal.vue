@@ -19,12 +19,22 @@
                 Договор
               </label>
               <label class="custom-radio-label">
-                <input type="radio" name="docType" value="Справка" />
+                <input 
+                  type="radio" 
+                  name="docType" 
+                  value="Справка" 
+                  v-model="documentType"
+                />
                 <span class="custom-radio-checkmark"></span>
                 Справка
               </label>
               <label class="custom-radio-label">
-                <input type="radio" name="docType" value="Другое" />
+                <input 
+                  type="radio" 
+                  name="docType" 
+                  value="Другое" 
+                  v-model="documentType"
+                />
                 <span class="custom-radio-checkmark"></span>
                 Другое
               </label>
@@ -43,16 +53,30 @@
           </div>
           <div class="add-document-modal__input-group">
             <span class="add-document-modal__label fc-secondary">Номер</span>
-            <input type="text" class="add-document-modal__input" />
+            <input 
+              type="text" 
+              class="add-document-modal__input"
+              v-model="documentNumber" 
+            />
           </div>
           <div class="add-document-modal__date-group">
             <div class="add-document-modal__date-input">
-              <span class="add-document-modal__label">Действует с:</span>
-              <input type="text" class="add-document-modal__input" placeholder="Не выбрано">
+                <span class="add-document-modal__label">Действует с:</span>
+                <input 
+                  type="date"
+                  class="add-document-modal__input" 
+                  placeholder="Не выбрано" 
+                  v-model="dateFrom" 
+                />
             </div>
             <div class="add-document-modal__date-input">
-              <span class="add-document-modal__label">по:</span>
-              <input type="text" class="add-document-modal__input" placeholder="Не выбрано">
+                <span class="add-document-modal__label">по:</span>
+                <input 
+                  type="date"
+                  class="add-document-modal__input" 
+                  placeholder="Не выбрано" 
+                  v-model="dateTo" 
+                />
             </div>
           </div>
           <div class="add-document-modal__checkboxes">
@@ -68,9 +92,14 @@
             </label>
           </div>
           <div class="add-document-modal__upload-zone">
-            <div class="add-document-modal__upload-icon">+</div>
+            <div class="add-document-modal__upload-icon">
+                <PlusleIcon />
+            </div>
             <span class="add-document-modal__upload-text">Загрузить файл</span>
-            <span class="add-document-modal__upload-hint">Выберите файл или перетащите его сюда</span>
+            <span class="add-document-modal__upload-hint fc-secondary">
+                <span class="add-document-modal__upload-hint-undeline">Выберите файл</span> 
+                или перетащите его сюда
+            </span>
           </div>
       </div>
       <div class="add-document-modal__actions">
@@ -96,20 +125,37 @@
 <script setup>
 import { ref, watch } from 'vue';
 import AppButton from './AppButton.vue';
+import PlusleIcon from './icons/PlusleIcon.vue';
+import { useDocumentStore } from '@/stores/documents'; 
 
 const emit = defineEmits(['close', 'submit']);
 
+const documentStore = useDocumentStore();
+
 const documentType = ref('');
 const documentTitle = ref('');
+const documentNumber = ref('');
+const dateFrom = ref('');
+const dateTo = ref('');
+
 const isFormValid = ref(false);
 
 watch([documentType, documentTitle], () => {
   isFormValid.value = !!documentType.value && !!documentTitle.value;
 });
 
-const submitForm = () => {
+const submitForm = async () => {
   if (isFormValid.value) {
-    console.log('Form submitted:');
+    const newDocument = {
+      type: documentType.value,
+      title: documentTitle.value,
+      number: documentNumber.value,
+      dateFrom: dateFrom.value,
+      dateTo: dateTo.value, 
+      status: 'Заключен', 
+      fileType: 'doc',
+    };
+    await documentStore.addDocument(newDocument);
     emit('close');
   }
 };
@@ -139,6 +185,10 @@ const submitForm = () => {
     font-size: 18px;
   }
 
+  &__upload-hint-undeline {
+    text-decoration: underline;
+  }
+
   &__label-star{
     color: $color-status-orange;
   }
@@ -151,12 +201,12 @@ const submitForm = () => {
 
   &__radio-group {
     display: flex;
-    flex-direction: column;
     gap: 10px;
   }
 
   &__radio-options {
     display: flex;
+    flex-direction: column;
     gap: 20px;
   }
 
@@ -198,7 +248,9 @@ const submitForm = () => {
     justify-content: center;
     text-align: center;
     height: 200px;
-    border: 2px dashed $color-text-grey-light;
+    background-color: $color-bg-light;
+    box-shadow: $shadow-default;
+    border: 1px solid $color-text-grey-light;
     border-radius: 10px;
     gap: 10px;
 

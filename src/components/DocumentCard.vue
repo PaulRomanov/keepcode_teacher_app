@@ -2,7 +2,7 @@
   <div class="document-card">
     <div class="document-card__info">
         <span class="document-card__type">
-          {{ document.type }}<template v-if="document.number"> №{{ document.number }}</template>
+          {{ document.title }}<template v-if="document.number"> №{{ document.number }}</template>
         </span>
         <div 
            v-show="document.type === 'Договор'"
@@ -20,7 +20,7 @@
         <div class="document-card__actions">
           <PrinterleIcon class="document-card__action-icon" />
           <EditIcon class="document-card__action-icon" />
-          <BinIcon class="document-card__action-icon" />
+          <BinIcon class="document-card__action-icon" @click="handleDelete" />
         </div>
     </div>
     <div class="document-card__icon-wrapper">
@@ -35,6 +35,7 @@ import BinIcon from "./icons/BinIcon.vue";
 import EditIcon from "./icons/EditIcon.vue";
 import PrinterleIcon from "./icons/PrinterleIcon.vue";
 import FileIcon from './icons/FileIcon.vue';
+import { useDocumentStore } from '@/stores/documents';
 
 const props = defineProps({
   document: {
@@ -42,6 +43,12 @@ const props = defineProps({
     required: true,
   },
 });
+
+const documentStore = useDocumentStore();
+
+const handleDelete = () => {
+  documentStore.deleteDocument(props.document.id);
+};
 </script>
 
 <style lang="scss" scoped>

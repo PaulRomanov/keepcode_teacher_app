@@ -29,7 +29,9 @@
   import DocumentCard from '@/components/DocumentCard.vue';
   import AppModal from '@/components/AppModal.vue';
   import AddDocumentModal from '@/components/AddDocumentModal.vue';
-  import { fetchDocuments } from '@/api';
+  import { useDocumentStore } from '@/stores/documents';
+
+  const documentStore = useDocumentStore();
 
   const studentData = ref({
     id: 1,
@@ -56,7 +58,7 @@
   });
 
   onMounted(async () => {
-    documents.value = await fetchDocuments();
+    documentStore.fetchDocuments();
   });
 
   const handleFiltersUpdate = (newFilters) => {
@@ -64,7 +66,7 @@
   };
 
   const filteredDocuments = computed(() => {
-    let filtered = documents.value;
+    let filtered = documentStore.documents;
 
     if (filters.value.type) {
       filtered = filtered.filter(doc => doc.type === filters.value.type);

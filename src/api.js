@@ -2,6 +2,7 @@ const documents = [
   {
     id: 1,
     type: 'Договор',
+    title: 'Договор',
     number: '001',
     status: 'Заключен',
     dateFrom: '04.07.2025',
@@ -11,6 +12,7 @@ const documents = [
   {
     id: 2,
     type: 'Договор',
+    title: 'Договор',
     number: '002',
     status: 'Расторгнут',
     dateFrom: '04.07.2024',
@@ -20,6 +22,7 @@ const documents = [
   {
     id: 3,
     type: 'Справка',
+    title: 'Справка',
     number: '',
     status: 'Заключен',
     dateFrom: '04.07.2023',
@@ -29,6 +32,7 @@ const documents = [
   {
     id: 4,
     type: 'Анкета',
+    title: 'Анкета',
     number: '',
     status: 'Заключен',
     dateFrom: '04.07.2021',
